@@ -1,34 +1,40 @@
-import React, {Component, useEffect, useState} from 'react';
+import React, {Component, useEffect, useState, SetStateAction} from 'react';
 import socketIOClient from "socket.io-client"
 import {IonInput} from "@ionic/react";
+import './ChatBot.css'
 
-const BASE_URL = "http://localhost:3001"
+const socket = socketIOClient("http://localhost:3001")
+
+function send() {
+
+    let message = (document.getElementById('messageInput') as HTMLInputElement).value
+    if (message.length !== 0) {
+        socket.emit("chat", {message: message});
+        (document.getElementById('messageInput') as HTMLInputElement).value = ""
+    }
+}
+
+setInterval(function () {
+    socket.on("chat", data => {
+        (document.getElementById('output') as HTMLInputElement).insertAdjacentHTML('beforeend', '<p>' + data.user + '</p>');
+        (document.getElementById('output') as HTMLInputElement).insertAdjacentHTML('beforeend', '<p>' + data.server + '</p>');
+    })
+}, 5000)
+
 
 function ChatBot() {
 
-    useEffect(() => {
-        send()
-    }, [])
-
-    function send() {
-        let message = (document.getElementById('messageInput') as HTMLInputElement).value
-
-        const socket = socketIOClient(BASE_URL)
-        socket.on("chat", data => {
-            console.log(data)
-        })
-        socket.emit("chat", {message: message})
-    }
-
     return (
-        <div>
-            <div id="messagesAll">a</div>
-            <input type="text" id="messageInput"/>
-            <button type="submit" onClick={send}>Gönder</button>
-        </div>
-    );
+        <div id="wrap">
+            <div id="window">
+                <div id="output"></div>
+            </div>
 
-}
+            <input type="text" id="messageInput" placeholder="message"/>
+            <button type="submit" id="submit" onClick={send}>Gönder</button>
+        </div>
+
+    );
+};
 
 export default ChatBot;
-

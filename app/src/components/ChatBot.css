@@ -1,0 +1,58 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+input:focus, button:focus {
+    outline: 0
+}
+
+#wrap {
+    max-width: 480px;
+    margin: 30px auto;
+    border: 1px solid #e04055;
+    border-radius: 5px;
+}
+
+#window {
+    height: 400px;
+    overflow-y: auto;
+}
+
+#output p {
+    font-size: 15px;
+    padding: 12px;
+}
+
+#output p:nth-child(even) {
+    background-color: #d7d8da;
+}
+
+#back p {
+    font-size: 15px;
+    padding: 12px;
+}
+
+#output strong{
+    color: #ff4961;
+}
+
+#messageInput{
+    padding: 10px 20px;
+    border: 0;
+    border-top: 1px solid #ccc;
+    display: block;
+    width: 100%;
+    font-size: 15px;
+}
+
+button{
+    padding: 10px 0;
+    color: wheat;
+    background-color: #ff4961;
+    border: 0;
+    border-radius: 0 0 5px 5px;
+    width: 100%;
+
+}
