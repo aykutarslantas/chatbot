@@ -18,16 +18,17 @@ function ChatBot() {
 
     useEffect(() => {
         socket.on("chat", data => {
-            console.log(data);
-            setMessages([...messages, data]);
+            setMessages(messages => [...messages, data]);
         })
     }, [])
-
-    console.log(messages)
+    console.log(messages);
     return (
         <div id="wrap">
             <div id="window">
-                {messages && messages.map((m) => <div>{m.server}</div>)}
+                <div id="output">
+                    {messages && messages.map((m, index) => <div key={m.index}><p> {m.user} </p> <p> {m.server} </p>
+                    </div>)}
+                </div>
             </div>
 
             <input type="text" id="messageInput" placeholder="message"/>
