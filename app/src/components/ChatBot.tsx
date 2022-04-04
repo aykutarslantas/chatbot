@@ -26,7 +26,10 @@ function ChatBot() {
         <div id="wrap">
             <div id="window">
                 <div id="output">
-                    {messages && messages.map((m, index) => <div key={m.index}><p> {m.user} </p> <p> {m.server} </p>
+                    {messages && messages.map((m, index) =>
+                        <div key={m.index}>
+                            <p dangerouslySetInnerHTML={{__html:m.user}}></p>
+                            <p dangerouslySetInnerHTML={{__html:m.server}}></p>
                     </div>)}
                 </div>
             </div>

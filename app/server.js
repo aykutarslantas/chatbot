@@ -26,8 +26,6 @@ io.on('connection', (socket) => {
             send.server = "Welcome, How can i help you?";
             send.user = "";
         }
-        console.log("sending " + send);
-
         io.sockets.emit('chat', send)
     })
 })
