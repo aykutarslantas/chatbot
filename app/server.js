@@ -10,7 +10,7 @@ const io = require('socket.io')(server, {
 app.use(express.static('./build'))
 
 var send = {
-    "server": "I didn't understand what you said. I am constantly updating. You can try these.<br><small style='color: green'><strong>[Hello]</strong> OR <strong>[I need help on payment]</strong></small>",
+    "server": "",
     "user": ""
 }
 
@@ -25,6 +25,8 @@ io.on('connection', (socket) => {
         }else if (data.message === "Welcome") {
             send.server = "Welcome, How can i help you?";
             send.user = "";
+        }else{
+            send.server = "I didn't understand what you said. I am constantly updating. You can try these.<br><small style='color: green'><strong>[Hello]</strong> OR <strong>[I need help on payment]</strong></small>"
         }
         io.sockets.emit('chat', send)
     })
